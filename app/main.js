@@ -1,5 +1,6 @@
-var express = require('express');
-var app = express();
+var express = require('express'),
+    app = express(),
+    port = process.env.PORT || 8081;
 require('../config/database');
 
 app.all('*', function(req, res, next) {
@@ -23,8 +24,8 @@ app.post('/poster', function (req, res) {
     res.json({ 'cool': 'dude' }).status(200);
 });
 
-app.listen(8081, function () {
-  console.log('Example app listening on port 3001!');
+app.listen(port, function () {
+  console.log('Example app listening on port ' + port);
 });
 
 //test
