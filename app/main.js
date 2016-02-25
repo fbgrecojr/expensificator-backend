@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+require('../config/database');
 
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
