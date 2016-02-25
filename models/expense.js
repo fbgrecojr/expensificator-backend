@@ -16,7 +16,7 @@ var Schema = Mongoose.Schema;
 
 var expenseSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'user' },
-    items: { {type: String }, {type: Number} },
+    items: [{type: String }, {type: Number}],
     type: {type: String},
     totalAmount: {type: Number},
     location: {type: String},
