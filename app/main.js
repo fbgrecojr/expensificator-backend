@@ -2,6 +2,7 @@ var express = require('express'),
     app = express(),
     port = process.env.PORT || 8081;
 require('../config/database');
+var expense = require('../models/expense').expense;
 
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -23,6 +24,28 @@ app.get('/hello', function (req, res) {
 app.post('/poster', function (req, res) {
     res.json({ 'cool': 'dude' }).status(200);
 });
+
+/*app.post('/saveExpense', function(req, res){
+  var exp = new expense(req.body);
+
+  expense.save(function(error, data){
+    if(error){
+        res.json(error);
+    }
+    else{
+        res.json(data);
+    }
+  });
+});
+
+app.post('/findExpense', function(req,res){
+  var exp = new expense(req.body);
+
+  expense.find({type:'Groceries'}, function(error,data){
+    console.log(data);
+    res.json(data);
+  });
+}); */
 
 app.listen(port, function () {
   console.log('Example app listening on port ' + port);
