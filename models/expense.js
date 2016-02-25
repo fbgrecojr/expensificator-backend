@@ -16,9 +16,12 @@ var Schema = Mongoose.Schema;
 
 var expenseSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'user' },
-    items: { {type: String }, {type: String} },
-    "type": {type: String},
+    items: { {type: String }, {type: Number} },
+    type: {type: String},
+    totalAmount: {type: Number},
+    location: {type: String},
     dateSubmitted: { type: String },
+    picture: {type: String}
 });
 
 expenseSchema.index({ expense: '_id' });
