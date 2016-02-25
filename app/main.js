@@ -22,6 +22,6 @@ app.post('/poster', function (req, res) {
     res.json({ 'cool': 'dude' }).status(200);
 });
 
-app.listen(3001, function () {
+app.listen(8080, function () {
   console.log('Example app listening on port 3001!');
 });
