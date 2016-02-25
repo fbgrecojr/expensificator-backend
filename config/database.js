@@ -39,6 +39,41 @@ db.once('open', function callback(){
     console.log('database connected');
 });
 
+var expense_data = {
+    user: '769786saf443543saf79809hgf',
+    items: '{"water", 5},{"chips",6}',
+    type: 'Groceries',
+    Totalamount: 11.50,
+    location: 'Los Angeles, California',
+    dateSubmitted: '2-25-2016',
+    picture: '234fdlkj34sr3084lkdfj'
+/*var expenseSchema = new Schema({
+    user: { type: Schema.Types.ObjectId, ref: 'user' },
+    items: { {type: String }, {type: Number} },
+    type: {type: String},
+    totalAmount: {type: Number},
+    location: {type: String},
+    dateSubmitted: { type: String },
+    picture: {type: String}
+});*/
+};
+
+var expense = new expense(expense_data);
+
+expense.save(function(error, data){
+    if(error){
+        res.json(error);
+    }
+    else{
+        res.json(data);
+    }
+});
+
+expense.find({type:'Groceries'}, function(error,data){
+    console.log(data);
+    res.json(data);
+})
+
 exports.Mongoose = Mongoose;
 
 exports.db = db;
