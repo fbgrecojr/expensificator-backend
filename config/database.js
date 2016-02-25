@@ -18,14 +18,14 @@ var options = {
 };
 
 // var mongodburi = 'mongodb://user:password@host:port/db'
-//var mongodburi = 'mongodb://' +
-  //  config.database.username + ':' +
-   // config.database.password + '@' +
-    //config.database.host + ':' +
-    //config.database.port + '/' +
-    // config.database.db;
+var mongodburi = 'mongodb://' +
+ config.database.username + ':' +
+   config.database.password + '@' +
+    config.database.host + ':' +
+    config.database.port + '/' +
+    config.database.db;
 
- var mongodburi = 'mongodb://admin:admin@ds017258.mlab.com:17258/expensificator';   
+ //var mongodburi = 'mongodb://admin:admin@ds017258.mlab.com:17258/expensificator';   
 
 var mongooseUri = uriUtil.formatMongoose(mongodburi);
 
