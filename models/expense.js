@@ -1,5 +1,4 @@
 var Mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
 var Schema = Mongoose.Schema;
 
 // example expense:
@@ -16,7 +15,6 @@ var Schema = Mongoose.Schema;
 
 var expenseSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'user' },
-    items: [{type: String }, {type: Number}],
     type: {type: String},
     totalAmount: {type: Number},
     location: {type: String},

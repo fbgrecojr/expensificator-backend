@@ -1,8 +1,18 @@
 var express = require('express'),
     app = express(),
     port = process.env.PORT || 8081;
-require('../config/database');
-var expense = require('../models/expense').expense;
+//<<<<<<< Updated upstream
+//require('../config/database');
+//var expense = require('../models/expense').expense;
+
+var database = require('../config/database');
+var exp = require('../modules/createexpense');
+
+//some function
+
+exp(database.db);
+
+//>>>>>>> Stashed changes
 
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
