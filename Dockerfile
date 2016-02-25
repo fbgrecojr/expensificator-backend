@@ -15,4 +15,4 @@ COPY . /src
 
 EXPOSE 8081
 
-CMD ["npm", "start"]
+CMD ["node", "./app/main.js"]
