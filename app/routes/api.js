@@ -1,5 +1,6 @@
 var User = require('../models/users').User;
 var Expense = require('../models/expense').Expense;
+var Mileage = require('../models/mileage').Mileage;
 
 module.exports = function (app) {
     var someFunc = function () {};
@@ -26,12 +27,20 @@ module.exports = function (app) {
     app.post('/api/expense', function (req, res) {
         // var newUser = new User(req.body);
         console.log(req.body);
+        var today = new Date();
+        var dd = today.getDate(); 
+        var mm = today.getMonth()+1; 
+        var yyyy = today.getFullYear(); 
+
+        var today = mm+'/'+dd+'/'+yyyy;
+
         var newExpense = {
             user:           req.body.user,
             vendor:         req.body.vendor,
             type:           req.body.type,
             Totalamount:    req.body.amount,
             datePurchased:  req.body.date,
+            dateSubmitted:  today,
             picture:        req.body.picture
         };
 
@@ -40,6 +49,32 @@ module.exports = function (app) {
                 res.status(500).json(err);
             } else {
                 res.status(201).json(expense);
+            }
+        });
+    });
+
+    app.post('/api/mileage', function (req, res) {
+        // var newUser = new User(req.body);
+        console.log(req.body);
+        var calcMileage = req.body.endingMileage - req.body.startingMileage;
+        var today = new Date();
+        var dd = today.getDate(); 
+        var mm = today.getMonth()+1; 
+        var yyyy = today.getFullYear(); 
+
+        var today = mm+'/'+dd+'/'+yyyy;
+
+        var newMileage = {
+            user:         req.body.user,
+            totalMileage: calcMileage,
+            dateSubmitted: today
+        };
+
+        Mileage.create(newMileage, function (err, mileage) {
+            if (err){
+                res.status(500).json(err);
+            } else {
+                res.status(201).json(mileage);
             }
         });
     });
@@ -100,22 +135,30 @@ module.exports = function (app) {
     
     app.get('/api/expense/:userId', function (req, res) {
         console.log(req.params);
-
-        /*var findByUserId = {
-            user: .req.params.userId
-        };*/
-
-        /*Expense.find({}, function (err, item) {
-            if (err) {
-                res.json(err);
-            } else {
-                res.json(item);
-            }
-        });*/
         
         User.findOne({ _id: req.params.userId }, function(err, user){
             if (!err) {
                 Expense.find({
+                   $or: [
+                       { user: user._id }
+                   ]
+                }).populate('user').exec(function(err, item){
+                    if (err) {
+                        res.json(err);
+                    } else {
+                        res.json(item);
+                    }
+                });
+            }
+        });
+    });
+
+    app.get('/api/mileage/:userId', function (req, res) {
+        console.log(req.params);
+        
+        User.findOne({ _id: req.params.userId }, function(err, user){
+            if (!err) {
+                Mileage.find({
                    $or: [
                        { user: user._id }
                    ]
