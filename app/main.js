@@ -3,6 +3,7 @@ var app = express();
 var port = process.env.PORT || 8081;
 var api = require('./routes/api');
 var database = require('./config/database');
+var bodyParser = require('body-parser');
 
 // require api routes
 require('./routes/api')(app);
@@ -30,6 +31,12 @@ require('./routes/api')(app);
 // find(database.db);
 
 //>>>>>>> Stashed changes
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
