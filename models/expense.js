@@ -16,9 +16,11 @@ var Schema = Mongoose.Schema;
 var expenseSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'user' },
     type: {type: String},
+    vendor: {type: String},
     totalAmount: {type: Number},
     location: {type: String},
     dateSubmitted: { type: String },
+    datePurchased: { type: String },
     picture: {type: String}
 });
 
@@ -26,6 +28,6 @@ expenseSchema.index({ expense: '_id' });
 
 var expense = Mongoose.model('expense', expenseSchema);
 
-module.exports = {
+exports.test = {
     expense: expense
 };

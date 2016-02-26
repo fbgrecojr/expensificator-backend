@@ -7,10 +7,23 @@ var express = require('express'),
 
 var database = require('../config/database');
 var exp = require('../modules/createexpense');
+var find = require('../modules/find');
 
 //some function
 
-exp(database.db);
+
+var request = {
+  user : "user456",
+  vendor: "Walmart" ,
+  type :"dinner",
+  Totalamount: 300,
+location : "India123",
+  datePurchased: "1-1-2016",
+  picture : "pcturebinarary"
+};
+
+exp(database.db, request);
+find(database.db);
 
 //>>>>>>> Stashed changes
 
