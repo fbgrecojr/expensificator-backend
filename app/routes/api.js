@@ -44,7 +44,7 @@ module.exports = function (app) {
         });
     });
 
-    app.post('/api/UpdateExpense/:id', function (req, res) {
+    /*app.put('/api/UpdateExpense/:id', function (req, res) {
         // var newUser = new User(req.body);
         console.log(req.body);
         var newExpense = {
@@ -63,9 +63,9 @@ module.exports = function (app) {
                 res.status(201).json(expense);
             }
         });
-    });
+    });*/
 
-    app.post('/api/DeleteExpense/:id', function (req, res) {
+    app.delete('/api/DeleteExpense/:id', function (req, res) {
         // var newUser = new User(req.body);
         console.log(req.body);
         var findById = {
