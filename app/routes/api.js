@@ -72,7 +72,7 @@ module.exports = function (app) {
             _id: req.params.id
         };
         
-        Expense.remove(newExpense, function (err, expense) {
+        Expense.remove(findById, function (err, expense) {
             if (err){
                 res.status(500).json(err);
             } else {
