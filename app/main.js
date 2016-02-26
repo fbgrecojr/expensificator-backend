@@ -5,9 +5,6 @@ var api = require('./routes/api');
 var database = require('./config/database');
 var bodyParser = require('body-parser');
 
-// require api routes
-require('./routes/api')(app);
-
 //<<<<<<< Updated upstream
 //require('../config/database');
 //var expense = require('../models/expense').expense;
@@ -37,6 +34,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+
+// require api routes
+require('./routes/api')(app);
 
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
