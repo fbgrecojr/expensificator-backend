@@ -42,7 +42,6 @@ module.exports = function (app) {
             type:           req.body.type,
             Totalamount:    req.body.amount,
             datePurchased:  req.body.date,
-<<<<<<< HEAD
             picture:        req.body.picture,
             notes:          req.body.notes
         };
@@ -77,11 +76,8 @@ module.exports = function (app) {
             Totalamount:    req.body.amount,
             datePurchased:  req.body.date,
             picture:        req.body.picture,
-            notes:          req.body.notes
-=======
-            dateSubmitted:  today,
+            notes:          req.body.notes,
             picture:        req.body.picture
->>>>>>> origin/master
         };
 
 console.log("expense");
@@ -100,8 +96,7 @@ console.log("expense");
         
     });
 
-<<<<<<< HEAD
-=======
+
     app.post('/api/mileage', function (req, res) {
         // var newUser = new User(req.body);
         console.log(req.body);
@@ -127,7 +122,7 @@ console.log("expense");
             }
         });
     });
->>>>>>> origin/master
+
 
     /*app.put('/api/UpdateExpense/:id', function (req, res) {
         // var newUser = new User(req.body);
@@ -217,7 +212,7 @@ console.log("expense");
         });
     });
 
-<<<<<<< HEAD
+
     
     app.get('/api/expenseemail/:email', function (req, res) {
         console.log(req.params);
@@ -227,14 +222,7 @@ console.log("expense");
             if (!err) {
                 console.log(user);
                 Expense.find({
-=======
-    app.get('/api/mileage/:userId', function (req, res) {
-        console.log(req.params);
-        
-        User.findOne({ _id: req.params.userId }, function(err, user){
-            if (!err) {
-                Mileage.find({
->>>>>>> origin/master
+
                    $or: [
                        { user: user._id }
                    ]
