@@ -1,29 +1,33 @@
-var express = require('express'),
-    app = express(),
-    port = process.env.PORT || 8081;
+var express = require('express');
+var app = express();
+var port = process.env.PORT || 8081;
+var api = require('./routes/api');
+var database = require('./config/database');
+
+// require api routes
+require('./routes/api')(app);
+
 //<<<<<<< Updated upstream
 //require('../config/database');
 //var expense = require('../models/expense').expense;
 
-var database = require('../config/database');
-var exp = require('../modules/createexpense');
-var find = require('../modules/find');
+// var exp = require('../modules/createexpense');
+// var find = require('../modules/find');
 
 //some function
 
+// var request = {
+//   user : "user456",
+//   vendor: "Walmart" ,
+//   type :"dinner",
+//   Totalamount: 300,
+//   location : "India123",
+//   datePurchased: "1-1-2016",
+//   picture : "pcturebinarary"
+// };
 
-var request = {
-  user : "user456",
-  vendor: "Walmart" ,
-  type :"dinner",
-  Totalamount: 300,
-location : "India123",
-  datePurchased: "1-1-2016",
-  picture : "pcturebinarary"
-};
-
-exp(database.db, request);
-find(database.db);
+// exp(database.db, request);
+// find(database.db);
 
 //>>>>>>> Stashed changes
 

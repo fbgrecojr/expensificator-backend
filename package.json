@@ -4,7 +4,7 @@
   "description": "the backend for expensificator",
   "main": "main.js",
   "scripts": {
-    "start": "node app/main.js",
+    "start": "nodemon app/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +24,8 @@
     "mongodb-uri": "^0.9.7",
     "mongoose": "^4.4.5",
     "node-base64-image": "^0.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.1"
   }
 }

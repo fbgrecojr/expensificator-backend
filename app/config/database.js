@@ -2,7 +2,6 @@ var Mongoose = require('mongoose');
 var uriUtil = require('mongodb-uri');
 var config = require('./config');
 
-
 var options = {
     server: {
         socketOptions: {
@@ -26,7 +25,7 @@ var mongodburi = 'mongodb://' +
     config.database.port + '/' +
     config.database.db;
 
- //var mongodburi = 'mongodb://admin:admin@ds017258.mlab.com:17258/expensificator';   
+ //var mongodburi = 'mongodb://admin:admin@ds017258.mlab.com:17258/expensificator';
 
 var mongooseUri = uriUtil.formatMongoose(mongodburi);
 
@@ -44,4 +43,4 @@ exports.Mongoose = Mongoose;
 
 exports.db = db;
 
-    
+
