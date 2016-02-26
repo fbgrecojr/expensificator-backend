@@ -28,6 +28,6 @@ expenseSchema.index({ expense: '_id' });
 
 var expense = Mongoose.model('expense', expenseSchema);
 
-exports.test = {
-    expense: expense
+module.exports = {
+    Expense: expense
 };
