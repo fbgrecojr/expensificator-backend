@@ -1,8 +1,0 @@
-var myCursor = db.bios.find( );
-
-var myDocument = myCursor.hasNext() ? myCursor.next() : null;
-
-if (myDocument) {
-    var myName = myDocument.name;
-    print (tojson(myName));
-}
