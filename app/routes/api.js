@@ -70,7 +70,6 @@ module.exports = function (app) {
                     type:           req.body.type,
                     Totalamount:    req.body.amount,
                     datePurchased:  req.body.date,
-                    picture:        req.body.picture,
                     notes:          req.body.notes,
                     picture:        req.body.picture
                 };
@@ -116,28 +115,27 @@ module.exports = function (app) {
         });
     });
 
-
-
-    /*app.put('/api/UpdateExpense/:id', function (req, res) {
+    /*
+    "expenseChanges":
+    {
+    "vendor": "this is changed again!!",
+    "datePurchased": "01/01/11"
+    }
+    */
+    app.put('/api/updateexpense/:id', function (req, res) {
         // var newUser = new User(req.body);
-        console.log(req.body);
-        var updateExpense = {
-            user:           req.body.user,
-            vendor:         req.body.vendor,
-            type:           req.body.type,
-            Totalamount:    req.body.amount,
-            datePurchased:  req.body.date,
-            picture:        req.body.picture
-        };
+        console.log(req.body.expenseChanges);
+        var query = {_id: req.params.id};
+        var update = req.body.expenseChanges;
 
-        Expense.create(updateExpense, function (err, expense) {
+        Expense.update(query, update, function (err, expense) {
             if (err){
                 res.status(500).json(err);
             } else {
                 res.status(201).json(expense);
             }
         });
-    });*/
+    });
 
     //submit expense - update date submitted
     app.put('/api/submitexpense/', function (req, res) {
@@ -254,7 +252,7 @@ module.exports = function (app) {
     
     app.get('/api/expenseemail/:email', function (req, res) {
         console.log(req.params);
-                
+
         User.findOne({ email: req.params.email}, function(err, user){
             if (!err) {
                 console.log(user);
