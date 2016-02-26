@@ -9,7 +9,9 @@ var Schema = Mongoose.Schema;
 
 var userSchema = new Schema({ // all validation done in handler via Joi
     firstName: { type: String },
-    lastName: { type: String }
+    lastName: { type: String },
+    email:{type: String},
+    password: {type: String}
 });
 
 // methods ============
