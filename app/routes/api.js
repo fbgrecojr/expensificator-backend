@@ -7,6 +7,7 @@ module.exports = function (app) {
 
     app.get('/someUrl', someFunc);
 
+    //add user
     app.post('/api/user', function (req, res) {
         // var newUser = new User(req.body);
         console.log(req.body);
@@ -24,15 +25,10 @@ module.exports = function (app) {
         });
     });
     
+    //add expense
     app.post('/api/expense', function (req, res) {
-        // var newUser = new User(req.body);
+        
         console.log(req.body);
-        var today = new Date();
-        var dd = today.getDate(); 
-        var mm = today.getMonth()+1; 
-        var yyyy = today.getFullYear(); 
-
-        var today = mm+'/'+dd+'/'+yyyy;
 
         var newExpense = {
             user:           req.body.user,
@@ -40,7 +36,6 @@ module.exports = function (app) {
             type:           req.body.type,
             Totalamount:    req.body.amount,
             datePurchased:  req.body.date,
-            dateSubmitted:  today,
             picture:        req.body.picture
         };
 
@@ -53,6 +48,7 @@ module.exports = function (app) {
         });
     });
 
+    //add mileage
     app.post('/api/mileage', function (req, res) {
         // var newUser = new User(req.body);
         console.log(req.body);
@@ -79,10 +75,10 @@ module.exports = function (app) {
         });
     });
 
-    /*app.put('/api/UpdateExpense/:id', function (req, res) {
+   /* app.put('/api/UpdateExpense/:id', function (req, res) {
         // var newUser = new User(req.body);
         console.log(req.body);
-        var newExpense = {
+        var updateExpense = {
             user:           req.body.user,
             vendor:         req.body.vendor,
             type:           req.body.type,
@@ -91,7 +87,7 @@ module.exports = function (app) {
             picture:        req.body.picture
         };
 
-        Expense.create(newExpense, function (err, expense) {
+        Expense.create(updateExpense, function (err, expense) {
             if (err){
                 res.status(500).json(err);
             } else {
@@ -100,6 +96,32 @@ module.exports = function (app) {
         });
     });*/
 
+    //submit expense - update date submitted
+    app.put('/api/submitexpense/', function (req, res) {
+         // var newUser = new User(req.body);
+        console.log(req.body);
+        var today = new Date();
+        var dd = today.getDate(); 
+        var mm = today.getMonth()+1; 
+        var yyyy = today.getFullYear(); 
+
+        var today = mm+'/'+dd+'/'+yyyy;
+
+        var update = {dateSubmitted: today},
+        options = { multi: true };
+
+        console.log(req.body.expenseIDs);
+        var query = {_id: {$in: req.body.expenseIDs}};
+        Expense.update(query, update, options, function (err, expense) {
+                if (err){
+                    res.status(500).json(err);
+                } else {
+                    res.status(201).json(expense);
+                }
+            });
+        });
+
+    //delete expense
     app.delete('/api/expense/:id', function (req, res) {
         // var newUser = new User(req.body);
         console.log(req.body);
@@ -116,7 +138,7 @@ module.exports = function (app) {
         });
     });
 
-
+    //retrieve user info
     app.get('/api/user/:id', function (req, res) {
         console.log(req.params);
 
@@ -133,6 +155,7 @@ module.exports = function (app) {
         });
     });
     
+    //retrieve user's expenses
     app.get('/api/expense/:userId', function (req, res) {
         console.log(req.params);
         
@@ -153,6 +176,7 @@ module.exports = function (app) {
         });
     });
 
+    //retrieve user's mileage
     app.get('/api/mileage/:userId', function (req, res) {
         console.log(req.params);
         
