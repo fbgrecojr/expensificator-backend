@@ -23,7 +23,13 @@ module.exports = function (app) {
     });
 
     app.get('/api/user/:id', function (req, res) {
-        User.findOne(req.params.id, function (err, user) {
+        console.log(req.params);
+
+        var findById = {
+            _id: req.params.id
+        };
+
+        User.findOne(findById, function (err, user) {
             if (err) {
                 res.json(err);
             } else {
@@ -31,4 +37,7 @@ module.exports = function (app) {
             }
         });
     });
+
+    // get all
+
 };
