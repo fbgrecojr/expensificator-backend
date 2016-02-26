@@ -44,6 +44,43 @@ module.exports = function (app) {
         });
     });
 
+    app.post('/api/UpdateExpense/:id', function (req, res) {
+        // var newUser = new User(req.body);
+        console.log(req.body);
+        var newExpense = {
+            user:           req.body.user,
+            vendor:         req.body.vendor,
+            type:           req.body.type,
+            Totalamount:    req.body.amount,
+            datePurchased:  req.body.date,
+            picture:        req.body.picture
+        };
+
+        Expense.create(newExpense, function (err, expense) {
+            if (err){
+                res.status(500).json(err);
+            } else {
+                res.status(201).json(expense);
+            }
+        });
+    });
+
+    app.post('/api/DeleteExpense/:id', function (req, res) {
+        // var newUser = new User(req.body);
+        console.log(req.body);
+        var findById = {
+            _id: req.params.id
+        };
+        
+        Expense.remove(newExpense, function (err, expense) {
+            if (err){
+                res.status(500).json(err);
+            } else {
+                res.status(201).json(expense);
+            }
+        });
+    });
+
 
     app.get('/api/user/:id', function (req, res) {
         console.log(req.params);
