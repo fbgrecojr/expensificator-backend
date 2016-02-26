@@ -65,7 +65,7 @@ module.exports = function (app) {
         });
     });*/
 
-    app.delete('/api/DeleteExpense/:id', function (req, res) {
+    app.delete('/api/expense/:id', function (req, res) {
         // var newUser = new User(req.body);
         console.log(req.body);
         var findById = {
