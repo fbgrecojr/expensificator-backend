@@ -21,4 +21,14 @@ module.exports = function (app) {
             }
         });
     });
+
+    app.get('/api/user/:id', function (req, res) {
+        User.findOne(req.params.id, function (err, user) {
+            if (err) {
+                res.json(err);
+            } else {
+                res.json(user);
+            }
+        });
+    });
 };
