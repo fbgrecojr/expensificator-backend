@@ -60,6 +60,38 @@ module.exports = function (app) {
             }
         });
     });
+    
+    app.get('/api/expense/:userId', function (req, res) {
+        console.log(req.params);
+
+        /*var findByUserId = {
+            user: .req.params.userId
+        };*/
+
+        /*Expense.find({}, function (err, item) {
+            if (err) {
+                res.json(err);
+            } else {
+                res.json(item);
+            }
+        });*/
+        
+        User.findOne({ _id: req.params.userId }, function(err, user){
+            if (!err) {
+                Expense.find({
+                   $or: [
+                       { user: user._id }
+                   ]
+                }).populate('user').exec(function(err, item){
+                    if (err) {
+                        res.json(err);
+                    } else {
+                        res.json(item);
+                    }
+                });
+            }
+        });
+    });
 
     // get all
     app.get('/api/users', function (req, res) {
