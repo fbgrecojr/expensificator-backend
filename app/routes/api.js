@@ -38,8 +38,6 @@ module.exports = function (app) {
             type:           req.body.type,
             Totalamount:    req.body.amount,
             datePurchased:  req.body.date,
-<<<<<<< HEAD
-=======
             picture:        req.body.picture,
             notes:          req.body.notes
         };
@@ -66,40 +64,32 @@ module.exports = function (app) {
                 
                 var useruniqueid = user._id;
                
-
                  var newExpense = {
-            user:           useruniqueid,
-            vendor:         req.body.vendor,
-            type:           req.body.type,
-            Totalamount:    req.body.amount,
-            datePurchased:  req.body.date,
-            picture:        req.body.picture,
-            notes:          req.body.notes,
->>>>>>> origin/master
-            picture:        req.body.picture
-        };
+                    user:           useruniqueid,
+                    vendor:         req.body.vendor,
+                    type:           req.body.type,
+                    Totalamount:    req.body.amount,
+                    datePurchased:  req.body.date,
+                    picture:        req.body.picture,
+                    notes:          req.body.notes,
+                    picture:        req.body.picture
+                };
 
-console.log("expense");
-        console.log(newExpense);
+                console.log("expense");
+                console.log(newExpense);
 
-        Expense.create(newExpense, function (err, expense) {
-            if (err){
-                res.status(500).json(err);
-            } else {
-                res.status(201).json(expense);
+                Expense.create(newExpense, function (err, expense) {
+                    if (err){
+                        res.status(500).json(err);
+                    } else {
+                        res.status(201).json(expense);
+                    }
+                });
             }
-        });
-            }
-        });
-   
-        
+        });   
     });
 
-<<<<<<< HEAD
     //add mileage
-=======
-
->>>>>>> origin/master
     app.post('/api/mileage', function (req, res) {
         // var newUser = new User(req.body);
         console.log(req.body);
@@ -126,12 +116,9 @@ console.log("expense");
         });
     });
 
-<<<<<<< HEAD
-   /* app.put('/api/UpdateExpense/:id', function (req, res) {
-=======
+
 
     /*app.put('/api/UpdateExpense/:id', function (req, res) {
->>>>>>> origin/master
         // var newUser = new User(req.body);
         console.log(req.body);
         var updateExpense = {
@@ -213,9 +200,6 @@ console.log("expense");
 
     app.get('/api/useremail/:email', function (req, res) {
         console.log(req.params);
-
- 
-
         User.findOne({email: req.params.email}, function (err, user) {
             if (err) {
                 res.json(err);
@@ -246,17 +230,31 @@ console.log("expense");
         });
     });
 
-<<<<<<< HEAD
     //retrieve user's mileage
     app.get('/api/mileage/:userId', function (req, res) {
-=======
+        console.log(req.params);
+        
+        User.findOne({ _id: req.params.userId }, function(err, user){
+            if (!err) {
+                Mileage.find({
+                   $or: [
+                       { user: user._id }
+                   ]
+                }).populate('user').exec(function(err, item){
+                    if (err) {
+                        res.json(err);
+                    } else {
+                        res.json(item);
+                    }
+                });
+            }
+        });
+    });
 
     
     app.get('/api/expenseemail/:email', function (req, res) {
->>>>>>> origin/master
         console.log(req.params);
-
-        
+                
         User.findOne({ email: req.params.email}, function(err, user){
             if (!err) {
                 console.log(user);
