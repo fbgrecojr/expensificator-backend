@@ -21,6 +21,7 @@ var expenseSchema = new Schema({
     location: {type: String},
     dateSubmitted: { type: String },
     datePurchased: { type: String },
+    notes: {type: String},
     picture: {type: String}
 });
 

@@ -13,7 +13,9 @@ module.exports = function (app) {
         console.log(req.body);
         var newUser = {
             firstName: req.body.firstName,
-            lastName: req.body.lastName
+            lastName: req.body.lastName,
+            email:req.body.email,
+            password: req.body.password
         };
 
         User.create(newUser, function (err, user) {
@@ -36,9 +38,13 @@ module.exports = function (app) {
             type:           req.body.type,
             Totalamount:    req.body.amount,
             datePurchased:  req.body.date,
-            picture:        req.body.picture
+<<<<<<< HEAD
+=======
+            picture:        req.body.picture,
+            notes:          req.body.notes
         };
 
+     
         Expense.create(newExpense, function (err, expense) {
             if (err){
                 res.status(500).json(err);
@@ -48,7 +54,52 @@ module.exports = function (app) {
         });
     });
 
+
+    app.post('/api/expenseemail', function (req, res) {
+        // var newUser = new User(req.body);
+        console.log(req.body);
+        
+         User.findOne({email: req.body.user}, function (err, user) {
+            if (err) {
+                res.json(err);
+            } else {
+                
+                var useruniqueid = user._id;
+               
+
+                 var newExpense = {
+            user:           useruniqueid,
+            vendor:         req.body.vendor,
+            type:           req.body.type,
+            Totalamount:    req.body.amount,
+            datePurchased:  req.body.date,
+            picture:        req.body.picture,
+            notes:          req.body.notes,
+>>>>>>> origin/master
+            picture:        req.body.picture
+        };
+
+console.log("expense");
+        console.log(newExpense);
+
+        Expense.create(newExpense, function (err, expense) {
+            if (err){
+                res.status(500).json(err);
+            } else {
+                res.status(201).json(expense);
+            }
+        });
+            }
+        });
+   
+        
+    });
+
+<<<<<<< HEAD
     //add mileage
+=======
+
+>>>>>>> origin/master
     app.post('/api/mileage', function (req, res) {
         // var newUser = new User(req.body);
         console.log(req.body);
@@ -75,7 +126,12 @@ module.exports = function (app) {
         });
     });
 
+<<<<<<< HEAD
    /* app.put('/api/UpdateExpense/:id', function (req, res) {
+=======
+
+    /*app.put('/api/UpdateExpense/:id', function (req, res) {
+>>>>>>> origin/master
         // var newUser = new User(req.body);
         console.log(req.body);
         var updateExpense = {
@@ -154,6 +210,20 @@ module.exports = function (app) {
             }
         });
     });
+
+    app.get('/api/useremail/:email', function (req, res) {
+        console.log(req.params);
+
+ 
+
+        User.findOne({email: req.params.email}, function (err, user) {
+            if (err) {
+                res.json(err);
+            } else {
+                res.json(user);
+            }
+        });
+    });
     
     //retrieve user's expenses
     app.get('/api/expense/:userId', function (req, res) {
@@ -176,13 +246,22 @@ module.exports = function (app) {
         });
     });
 
+<<<<<<< HEAD
     //retrieve user's mileage
     app.get('/api/mileage/:userId', function (req, res) {
+=======
+
+    
+    app.get('/api/expenseemail/:email', function (req, res) {
+>>>>>>> origin/master
         console.log(req.params);
+
         
-        User.findOne({ _id: req.params.userId }, function(err, user){
+        User.findOne({ email: req.params.email}, function(err, user){
             if (!err) {
-                Mileage.find({
+                console.log(user);
+                Expense.find({
+
                    $or: [
                        { user: user._id }
                    ]
