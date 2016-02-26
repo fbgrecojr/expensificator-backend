@@ -39,5 +39,14 @@ module.exports = function (app) {
     });
 
     // get all
+    app.get('/api/users', function (req, res) {
+        User.find({}, function (err, users) {
+            if (err) {
+                res.json(err);
+            } else {
+                res.send(users);
+            }
+        });
+    });
 
 };
