@@ -23,7 +23,8 @@
     "express": "^4.13.4",
     "mongodb-uri": "^0.9.7",
     "mongoose": "^4.4.5",
-    "node-base64-image": "^0.1.1"
+    "node-base64-image": "^0.1.1",
+    "nodemon": "^1.9.1"
   },
   "devDependencies": {
     "nodemon": "^1.9.1"
